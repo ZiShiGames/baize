@@ -1,0 +1,18 @@
+.alert {
+    padding: 8px;
+}
+.title_tab {
+    font-size: 18px;
+}
+.top_line {
+    margin-left: -15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 0;
+    border-top: 8px solid #428bca;
+}
+
+.myborder{
+    border: 0;
+    border-left: solid;
+}

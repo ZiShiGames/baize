@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+<style type="text/css">
+
+</style>
+<body style="text-align: center;color:#666666;font-size: 0.8em;margin-top: 45%;">
+
+	1.如果未打开微信客户端，请点击“继续支付”
+	<br/>
+	2.如果你已完成，请点击“已完成付款”
+	<br/>
+	<br/>
+	<div id="wxpay" style="width: 100%;height: 10vw;margin: 0 auto;display: block;background-color: #33cc56;color: #fff;line-height: 10vw;border-radius: 0.2em;font-size: 1.2em;">
+		继续支付
+	</div>
+	<br/>
+	<div  style="width: 100%;height: 10vw;margin: 0 auto;display: block;border:0.1px solid;line-height: 10vw;border-radius: 0.2em;font-size: 1.2em;">
+		已完成付款
+	</div>
+</body>
+<script type="text/javascript">
+	
+	if(getQueryVariable('pay_url')!=''){
+		//alert(parent.parent.h5pay_getScheme(decodeURIComponent(getQueryVariable('pay_url'))));
+		document.getElementById('wxpay').href=decodeURIComponent(getQueryVariable('pay_url'))
+		
+	}
+	
+	 document.getElementById('wxpay').onclick = function(e){  
+	        // 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP，并自动阻止a标签的默认行为  
+	        // 否则打开a标签的href链接  
+	        
+	        var ifr = document.createElement('iframe');  
+	        ifr.src = this.href;  
+	        ifr.style.display = 'none';  
+	        document.body.appendChild(ifr);  
+	        window.setTimeout(function(){  
+	            document.body.removeChild(ifr); 
+	           	console.log(ifr.src);
+	            //window.location.href=ifr.src; 
+	        },3000);
+	       
+	 };
+	 
+	function getQueryVariable(variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+</script>
+</html>

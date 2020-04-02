@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>H5支付</title>
+	<script type="text/javascript" src="http://j.gamersky.com/g/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="http://j.gamersky.com/g/touch-0.2.14.min.js"></script>
+	<link rel="stylesheet" href="http://j.gamersky.com/yeyou/yy.pay.css">
+	<script src="http://j.gamersky.com/yeyou/yy.pay.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			var payinfo = getParameter('payinfo');
+			console.log(decodeURIComponent(payinfo));
+			payinfo = JSON.parse(decodeURIComponent(payinfo));
+
+			var ispc = IsPC();
+			$(".pay-alipay").on("click", function() {
+				var url = "http://pay.gamersky.com/gamerskyalipay/h5payment?app_id=" + payinfo.app_id +
+					"&user_id=" + payinfo.user_id + "&bill_no=" + payinfo.bill_no + "&serverid=" + payinfo.serverid + "&gameaccount=" + payinfo.gameaccount + "&ext=" + payinfo.ext +
+					"&total_fee=" + payinfo.total_fee + "&sign=" + payinfo.sign + "&ispc=" + ispc;
+				console.log(url);
+				window.location.href = url;
+			});
+			$(".pay-weixin").on("click", function() {
+				$.ajax({
+					type: "get",
+					url: "http://pay.gamersky.com/gamerskyweixin/weixinpayment?app_id=" + payinfo.app_id +
+						"&user_id=" + payinfo.user_id + "&bill_no=" + payinfo.bill_no + "&serverid=" + payinfo.serverid + "&gameaccount=" + payinfo.gameaccount + "&ext=" + payinfo.ext +
+						"&total_fee=" + payinfo.total_fee + "&sign=" + payinfo.sign + "&ispc=" + ispc,
+					dataType: "jsonp",
+					success: function(responseJson) {
+						if (responseJson.Status == 'ok') {
+							var ordernum = responseJson.ordernum;
+							window.location.href = responseJson.Data;
+						}
+					}
+				});
+			})
+		});
+		var getParameter = function(key) {
+			var href = location.search;
+			var p = href.substr(1, href.length - 1).split("&");
+			for (var i = 0; i < p.length; i++) {
+				if ((p[i].split("="))[0] == key) {
+					return p[i].split("=")[1]
+				}
+			}
+		};
+
+		function IsPC() {
+			var userAgentInfo = navigator.userAgent;
+			var Agents = ["Android", "iPhone",
+				"SymbianOS", "Windows Phone",
+				"iPad", "iPod"
+			];
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgentInfo.indexOf(Agents[v]) > 0) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		};
+	</script>
+</head>
+
+<body>
+	<div class="payMask payPopMain payPopClose"></div>
+	<div class="payPop payPopMain">
+		<header>
+			<h5>选择支付方式</h5><a class="payPopCloseBtn payPopClose" href="返回地址"></a></header>
+		<section>
+			<div class="cash">
+				<p class="tips">您需支付</p>
+				<p class="num"></p>
+			</div>
+		</section>
+		<footer>
+			<div class="btngroup">
+				<a class="pay-alipay" href="javascript:void(0);">支付宝支付</a>
+				<a class="pay-weixin" href="javascript:void(0);">微信支付</a>
+			</div>
+		</footer>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+
+
+<script type="text/javascript">
+
+    function onBridgeReady(){
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', getRequest(),
+            function(res){
+                if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                    //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                    window.opener=null;
+                    window.open('','_self');
+                    window.close();
+                    // document.getElementById("demo").style.display="";//显示
+                }
+            });
+    }
+
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            var data = getRequest();
+            if(data['error']=='1'){
+                alert("订单已失效！");
+            }else if(data['error']=='2'){
+                alert("请勿重复下单！");
+            }else{
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    }else{
+        onBridgeReady();
+    }
+
+    function getRequest(){
+        var url=decodeURI(window.location.search);
+        console.log('url:' + url)
+        var jsonList={};
+        if(url.indexOf("?")>-1){
+            var str=url.slice(url.indexOf("?")+1);
+            var strs=str.split("&");
+            for(var i=0;i<strs.length;i++){
+                jsonList[strs[i].split("=")[0]]=strs[i].split("=")[1];//如果出现乱码的话，可以用decodeURI()进行解码
+                if(strs[i].split("=")[0]=='package'){
+                    jsonList['signType']="MD5";
+                    jsonList['package']="prepay_id="+strs[i].split("=")[1];
+                }
+            }
+        }
+        console.log(jsonList)
+        return jsonList;
+
+    }
+
+
+</script>
+</html>

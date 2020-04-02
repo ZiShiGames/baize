@@ -1,0 +1,58 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>跳转提示</title>
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+
+</head>
+
+<body class="gray-bg">
+<p class="detail"></p>
+    <div class="middle-box text-center animated fadeInDown">
+        <?php if(isset($message)) {?>
+         <h1 class="font-bold animated bounceInDown"><i class="glyphicon glyphicon-ok text-success"></i></h1>
+        <div class="error-desc">
+           <h3><?php echo($message); ?></h3><br/>
+           <h6>页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></h6>
+        </div>
+        <?php }else{?>
+        <h1 class="font-bold animated shake"><i class="glyphicon glyphicon-remove text-danger"></i></h1>
+        <div class="error-desc">
+           <h3><?php echo($error); ?></h3><br/>
+           <h6>页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b></h6>
+        </div>
+          <?php } ?>
+    </div>
+
+  <!-- 全局js -->
+    <include file="Public:globalJs"/>
+    <script type="text/javascript">
+    (function(){
+    var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+    var interval = setInterval(function(){
+        var time = --wait.innerHTML;
+        if(time <= 0) {
+            location.href = href;
+            clearInterval(interval);
+        };
+    }, 1000);
+    })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+    "projectName": "sheet_2",
+    "version": 5,
+    "files": [
+        "./../hitBoos/hitBoos_2_4.png",
+        "./../hitBoos/hitBoos_2_3.png",
+        "./../hitBoos/hitBoos_2_2.png",
+        "./../hitBoos/hitBoos_2_1.png",
+        "./../hitBoos/hitBoos_2_0.png",
+        "./../hitBoos/hitBoos_1_4.png",
+        "./../hitBoos/hitBoos_1_3.png",
+        "./../hitBoos/hitBoos_1_2.png",
+        "./../hitBoos/hitBoos_1_1.png",
+        "./../hitBoos/hitBoos_1_0.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "3"
+    }
+}

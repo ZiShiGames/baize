@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+
+</head>
+<style type="text/css">
+@media screen and (max-width: 1200px) {
+    .excelBtn{
+        margin-top:-35px;
+        float:right;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .excelBtn{
+        margin-top:-35px;
+        float:none;
+    }
+}
+.i_button {
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
+}
+
+.i_button:hover {
+    background: #2980b9;
+    background-image: -webkit-linear-gradient(top, #2980b9, #3498db);
+    background-image: -moz-linear-gradient(top, #2980b9, #3498db);
+    background-image: -ms-linear-gradient(top, #2980b9, #3498db);
+    background-image: -o-linear-gradient(top, #2980b9, #3498db);
+    background-image: linear-gradient(to bottom, #2980b9, #3498db);
+    color: #ffffff;
+    text-decoration: none;
+}
+.ii_button {
+    background: #db345f;
+    background-image: -webkit-linear-gradient(top, #db345f, #b94d28);
+    background-image: -moz-linear-gradient(top, #db345f, #b94d28);
+    background-image: -ms-linear-gradient(top, #db345f, #b94d28);
+    background-image: -o-linear-gradient(top, #db345f, #b94d28);
+    background-image: linear-gradient(to bottom, #db345f, #b94d28);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #f3f0ee;
+    font-size: 14px;
+    padding: 3px 10px 3px 10px;
+    text-decoration: none;
+}
+
+.ii_button:hover {
+    background: #b92841;
+    background-image: -webkit-linear-gradient(top, #b92841, #db4e34);
+    background-image: -moz-linear-gradient(top, #b92841, #db4e34);
+    background-image: -ms-linear-gradient(top, #b92841, #db4e34);
+    background-image: -o-linear-gradient(top, #b92841, #db4e34);
+    background-image: linear-gradient(to bottom, #b92841, #db4e34);
+    color: #f3f0ee;
+    text-decoration: none;
+}
+</style>
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/kefu')}">
+                        <div class="col-md-2">
+                           时间： <input name="start_time" type="text" class="form-control layer-date" value="{:$_GET['start_time']}" readonly="" >
+                        </div>
+                        <div class="col-md-2">
+                            用户userid： <input name="user_id" class="form-control mySelect" type="text" value="{:$_GET['user_id']}" >
+                        </div>
+                        <div class="col-md-2">
+                            角色roleid： <input name="role_id" class="form-control mySelect" type="text" value="{:$_GET['role_id']}" >
+                        </div>
+                        <div class="col-md-2">
+                            工单状态： <select name="status" class="form-control mySelect" title="请选择">
+                                        <option value="1" <?php if($_GET['status']=='1'){ ?>selected<?php } ?> >未处理</option>
+                                        <option value="2" <?php if($_GET['status']=='2'){ ?>selected<?php } ?>>已处理</option>
+                                    </select>
+                        </div>
+                        <div>
+                           <br/> <button type="submit" class="btn btn-w-m btn-info" onclick='layer.load();$(this).addClass("disabled");' >查询</button>
+                        </div>
+
+                    </form>
+               <div class="hr-line-dashed"></div>
+    </div>
+
+            <div class="col-xs-12">
+                            <table data-toggle="table"   data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>游戏名称</th>
+                                        <th>反馈时间</th>
+                                        <th>工单类型</th>
+                                        <th>反馈内容</th>
+                                        <th>反馈详细</th>
+                                        <th>图片</th>
+                                        <th>联系方式</th>
+                                        <th>玩家userid</th>
+                                        <th>玩家roleid</th>
+                                        <th>角色名称</th>
+                                        <th>角色区服</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data as $k=>$v){ ?>
+                                    <tr>
+                                        <td>{:$v['game_name']} </td>
+                                        <td>{:$v['create_date']} </td>
+                                        <td>{:$v['category_name']} </td>
+                                        <td>{$v.content|msubstr=0,20}</td>
+                                        <td><button onclick="getDetailed('{:$v['content']}')">详细</button></td>
+                                        <td><?php if($v['image_url']){ ?><button onclick="threeFn('{:$v['id']}')">点我</button><?php }else{ ?>-<?php } ?> </td>
+                                        <td>{:$v['contact']} </td>
+                                        <td>{:$v['user_id']} </td>
+                                        <td>{:$v['role_id']} </td>
+                                        <td>{:$v['role_name']} </td>
+                                        <td>{:$v['ext']} </td>
+                                        <td><?php if(!$v['status']){ ?><button class="ii_button" onclick="operaTion('{:$v['id']}','{:$v['content']}')">点我回复</button><?php }else{ ?><button class="i_button" onclick="getConent('{:$v['kefu_reply']}')">查看回复</button><?php } ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                <div class="fixed-table-pagination">
+                    <div class="pull-left pagination-detail">
+                        {:$page}
+                    </div>
+                    </div>
+        </div>
+    <!-- 全局js -->
+
+    <include file="Public:globalJs"/>
+<!--    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>-->
+     <script src="__PUBLIC__/js/plugins/new_layer/layer.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script>
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            $('.pagination li').click(function(){       //分页转圈操作伪响应
+                    if(($(this).attr('class')!="active")&&($(this).attr('class')!="disabled")){
+                        layer.load();
+                    }
+            })
+            // function(){
+            //     $("wx_cps").style.display="none";
+            // }
+            //自适应 下拉选择框
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true
+              }
+                <?php if($_GET['product']){ ?>
+                  $('select[name=product]').selectpicker('val', "{:$_GET['product']}");
+                <?php } ?>
+
+                $('.mySelect').selectpicker({
+                     actionsBox:true,
+                     selectAllText:'全选',
+                     deselectAllText:'取消全选',
+                     liveSearch:true,
+                     mobile:ismobile
+                });
+                //时间选择器
+                laydate.render({
+                        elem: '.layer-date', //指定元素
+                        range: '到'
+                    });
+                //时间选择器
+                laydate.render({
+                        elem: '.layer-date1', //指定元素
+                        range: '到'
+                    });
+                //下拉联动以及加载预选
+            $('select[name=product]').on('changed.bs.select loaded.bs.select',function(e){
+                $('select[name="channel[]"]').html('');
+                $.post('{:U('h5Data/get_h5_channel')}',{id:$(this).val()},function(data){
+                    for(var i in data.info){
+                        $('select[name="channel[]"]').append("<option value=" + data.info[i].game_id + ">" + data.info[i].game_name  +"-"+data.info[i].platform+ "</option>");
+                    }
+                    <?php if($_GET['channel']){ ?>
+                        if(e.type=="loaded"){
+                          $('select[name="channel[]"]').selectpicker('val', "{:implode(",", $_GET['channel'])}".split(','));
+                        }
+                    <?php } ?>
+                    $('select[name="channel[]"]').selectpicker('refresh');
+                },'json');
+            });
+
+                //下拉联动以及加载预选
+            $('select[id=channel').on('changed.bs.select loaded.bs.select',function(e){
+                $('select[name="cpscode[]"]').html('');
+                $.post('{:U('h5Data/get_h5_cpscode')}',{code:$(this).val()},function(data){
+                    if (data.info) {
+                        document.getElementById('wx_cps').style.display ="";
+                    }else{
+                        document.getElementById('wx_cps').style.display ="none";
+                    }
+                    for(var i in data.info){
+                        $('select[name="cpscode[]"]').append("<option value=" + data.info[i] + ">" +data.info[i]+ "</option>");
+                    }
+                    <?php if($_GET['cpscode']){ ?>
+                          $('select[name="cpscode[]"]').selectpicker('val', "{:implode(",", $_GET['cpscode'])}".split(','));
+                    <?php } ?>
+                    $('select[name="cpscode[]"]').selectpicker('refresh');
+                },'json');
+            });
+
+            function threeFn(e){
+                $.getJSON('http://admin.baizegame.com/index.php/Home/h5Data/getImgJson?id=' + e, function(json){
+                    console.log(json)
+                    layer.photos({
+                        photos: json.data
+                        ,shift: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+                    });
+                });
+            }
+            
+            function operaTion(e,t) {
+                layer.prompt({
+                    formType: 2,//这里依然指定类型是多行文本框，但是在下面content中也可绑定多行文本框
+                    title: '填写反馈回复，并确定',
+                    area: ['300px', '100px'],
+                    btnAlign: 'c',
+                    content: `<div><p style="width: 180px">反馈内容:</br>`+ t +`</p><textarea name="txt_remark" id="remark" style="width:700px;height:400px;"></textarea></div>`,
+                    yes: function (index, layero) {
+                        var content = $('#remark').val();//获取多行文本框的值
+                        $.post('{:U('h5Data/getReply')}',{id:e,content:content},function(data){
+                            console.log(data)
+                            if(data.info=='1'){
+                                layer.close(index);
+                                msg('回复成功!');
+                            }else if(data.info=='2'){
+                                console.log('222')
+                                layer.close(index);
+                                msg('回复失败!');
+                            }
+                        })
+                    }
+                });
+            }
+
+
+            function getDetailed(e) {
+                layer.alert(e, {
+                    skin: 'layui-layer-molv' //样式类名
+                    ,closeBtn: 0
+                    // ,anim: 4 //动画类型
+                });
+            }
+
+            function getConent(e){
+                layer.alert(e, {
+                    skin: 'layui-layer-molv' //样式类名
+                    ,closeBtn: 0
+                    // ,anim: 4 //动画类型
+                });
+            }
+
+            /**
+             * 提示框[一些简单的提示信息]
+             * @param message 提示内容
+             * @param icon icon
+             * @param time 自动关闭所需毫秒（如果不配置，默认是3秒）
+             * @param func 自动关闭后执行特定的函数 string(函数名),bool(false)表示不执行
+             */
+            function msg(message, icon, func = true){
+                var index = layer.msg(message, {
+                    icon: icon,
+                }, function(){
+                    if(func != false){
+                        window.location.reload();
+                    }
+                });
+            }
+
+
+
+    </script>
+</body>
+
+</html>

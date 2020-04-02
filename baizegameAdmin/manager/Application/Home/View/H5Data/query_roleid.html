@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+    
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+     
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+    
+</head>
+
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/query_roleid')}">
+                        <div class="col-md-2">
+                           产品：<select name="product" class="form-control mySelect" title="请选择">
+                                    <?php foreach($product_list as $k=>$v){ ?>
+                                    <option value="{$k}">{$v}</option>
+                                    <?php } ?>
+                                </select>
+                        </div>
+                        <div class="col-md-2">
+                           角色uid： <input name="user_id" class="form-control mySelect" type="text" value="{:$_GET['user_id']}" >
+                        </div>
+                        <div class="col-md-2">
+                           研发roleid： <input name="role_id" class="form-control mySelect" type="text" value="{:$_GET['role_id']}" >
+                        </div>
+                        <div class="col-md-2">
+                           <br/> <button id="btn1" type="submit" class="btn btn-w-m btn-info" onclick='layer.load();$(this).addClass("disabled");' >查询</button>
+                        </div>
+                    </form>
+                   
+               <div class="hr-line-dashed"></div>   
+    </div>           
+               
+            <div class="col-xs-12">
+                            <table data-toggle="table" data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>所属游戏</th>
+                                        <th>所属渠道</th>
+                                        <th>所属区服</th>
+                                        <th>用户userId</th>
+                                        <th>研发roleId</th>
+                                        <th>角色openId</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data as $k=>$v){ ?>
+                                        <tr>
+                                            <td>{:$v['gameName']} </td>
+                                            <td>{:$v['gamePlatform']}</td>
+                                            <td>{:$v['gameExt']}</td>
+                                            <td>{:$v['userId']} </td>
+                                            <td>{:$v['roleId']} </td>
+                                            <td>{:$v['openId']} </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+        </div>
+    <!-- 全局js -->
+    
+    <include file="Public:globalJs"/>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <!-- <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script> -->
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            $('.pagination li').click(function(){
+                    if($(this).attr('class')!="active"||$(this).attr('class')!="disabled"){
+                        layer.load();
+                    }
+            })
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true      
+              }
+
+                <?php if($_GET['product']){ ?>
+                  $('select[name=product]').selectpicker('val', "{:$_GET['product']}");
+                <?php } ?>
+
+                $('.mySelect').selectpicker({
+                     actionsBox:true,
+                     selectAllText:'全选',
+                     deselectAllText:'取消全选',
+                     liveSearch:true,
+                     mobile:ismobile
+                });
+    </script>
+</body>
+
+</html>

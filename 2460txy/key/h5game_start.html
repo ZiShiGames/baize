@@ -1,0 +1,117 @@
+<!DOCTYPE>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>启动华为游戏中心H5游戏</title>
+	<style>
+		body {}
+
+		.allwkg {
+			width: 480px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+
+		#startBtn {
+			position: relative;
+			display: inline-block;
+			background: #A0EEFF;
+			border: 1px solid #99D3F5;
+			border-radius: 4px;
+			padding: 4px 12px;
+			overflow: hidden;
+			color: #1E88C7;
+			text-decoration: none;
+			2018-3-13 华为机密，未经许可不得扩散 第 13 页,
+			共 21 页 文档名称 文档密级 text-indent: 0;
+			line-height: 20px;
+		}
+
+		#ga me Id {
+			height: 30px;
+			background: #A0EEFF;
+			border: 1px solid #99D3F5;
+			color: #1E88C7;
+		}
+
+		#direction {
+			height: 30px;
+			background: #A0EEFF;
+			border: 1px solid #99D3F5;
+			color: #1E88C7;
+			padding- top: 0px
+		}
+
+		#prepare {
+			text-align: left;
+			color: #1E88C7;
+			mar gi n-top: 20px
+		}
+
+		.tipTitle {
+			font-size: 110%
+		}
+
+		2018-3-13 华为机密，未经许可不得扩散 第 14 页,
+		共 21 页 文档名称 文档密级 .tipConte nt {
+			font-size: 90%
+		}
+
+		.item {
+			mar gi n-left: 5p x
+		}
+	</style>
+	<script>
+		function startH5() {
+			var gameId = document.getElementById("gameId").value;
+			if (gameId.length == 0) {
+				alert("请H5游戏的appId");
+				return;
+			}
+			if (gameId.indexOf("H") != 0) {
+				if (gameId.indexOf("h") == 0) {
+					gameId = "H" + gameId.substring(1);
+				} else {
+					gameId = "H" + gameId;
+				}
+			}
+			var direction = document.getElementById("direction").value;
+			window.location.href = 'higame://openapp?openStr={"openId":"38","params":[{"name":"url","type":"String","value":"http%3A%2F%2Fhispaceclt.hicloud.com%3A8080%2Fhwmarket%2Fh5%2Fapp%3Fappid%3D' + gameId + '%26direction%3D' + direction +'"}]}&thirdId=4026640';
+		}
+	</script>
+</head>
+
+<body>
+	<div class="allwkg">
+		<div style="color: #1E88C7;">
+			<div style="float:left;margin-right:10px">
+				<input type="text" id="gameId" placeholder="请H5游戏的appId" value='100249465'> </div>
+			<div style="float:left;margin-right:10px"> <select id="direction">
+<option value ="1">竖屏</option>
+<option value ="0">横屏</option> </select>
+			</div>
+			<div style="float:left">
+				<button type="button" onclick="startH5()" id="startBtn">启动</button> </div>
+		</div>
+		2018-3-13 华为机密，未经许可不得扩散 第 16 页, 共 21 页 文档名称 文档密级
+
+		<br/>
+		<div id="prepare">
+			<div class="tipTitle">启动前准备: </div>
+			<div class="tipContent">
+				1. 用华为手机，进入应用市场，下载华为游戏中心客户端。<br/> 2. 将此html拷贝到手机的sd卡中，并用手机浏览器打开。<br/> 3. 在此html中输入H5游戏的appId，选择游戏横竖屏设置，并点击启动按钮，即可打开H5游戏。 <br/> 4. 请CP根据测试文档，对接入的游戏进行验证。
+			</div>
+		</div>
+		<div id="prepare">
+			<div class="tipTitle">常见问题: </div>
+			<div class="tipContent">
+				1. 启动后出现提示“该游戏已下架”:<br/>
+				<span class="item">1) 检查appId是否正确。<br/></span>
+				<span class="item">2) 请联系游戏中心运营确认H5游戏是否在应用市场后台配置完成。<br/></span> 2. 出现提示“网络未连接，请点击重试”，请检查网络是否可用。
+			</div>
+		</div>
+</body>
+
+</html>

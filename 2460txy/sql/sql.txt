@@ -1,0 +1,5 @@
+ALTER TABLE `game` ADD `game_father_id` INT(11) NOT NULL AFTER `game_name`;
+
+
+ALTER TABLE `platform` ADD `platform_key` VARCHAR(100) NOT NULL AFTER `platform_chinese`;
+ALTER TABLE `game` ADD `platform_key` VARCHAR(100) NOT NULL AFTER `platform`;

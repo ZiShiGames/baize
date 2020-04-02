@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+    
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+     
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+    
+</head>
+<style type="text/css">
+@media screen and (max-width: 1200px) { 
+    .excelBtn{
+        margin-top:-35px;
+        float:right;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .excelBtn{
+        margin-top:-35px;
+        float:none;
+    }
+}
+</style>
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/pay_section')}">
+                        <div class="col-md-2">
+                           时间： <input name="start_time" type="text" class="form-control layer-date" value="{:$_GET['start_time']}" readonly="" > 
+                        </div>
+
+                        <div class="col-md-2">
+                           充值区间： <input name="pay_start_time" type="text" class="form-control layer-date1" value="{:$_GET['pay_start_time']}" readonly="" > 
+                        </div>
+                        <div class="col-md-2">
+                           产品： <select name="product" class="form-control mySelect" title="请选择">
+                                    <?php foreach($product_list as $k=>$v){ ?>
+                                        <option value="{$k}">{$v}</option>
+                                    <?php } ?>
+                                 </select>
+                        </div>
+                        <div class="col-md-2">
+                           渠道： <select name="channel[]" id="channel" class="form-control mySelect" title="请选择" multiple>
+                                   
+                                 </select>
+                        </div>
+                        <div class="col-md-2" id="wx_cps" style="display: none;">
+                           小游戏渠道： <select name="cpscode[]" class="form-control mySelect" title="请选择" multiple>
+                                   
+                                 </select>
+                        </div>
+                        <div class="col-md-2">
+                           <br/> <button type="submit" class="btn btn-w-m btn-info" onclick='layer.load();$(this).addClass("disabled");' >查询</button>
+                        </div>
+                        
+                    </form>
+                    <!-- 导出excel按钮 开始-->
+                    <form action="{:U('h5Data/get_sectionExecl',array('start_time'=>$_GET[start_time],'product'=>$_GET['product'],'channel'=>json_encode($_GET['channel']),'cpscode'=>json_encode($_GET['cpscode']),'pay_start_time'=>$_GET['pay_start_time']))}" method="post">
+                        <div class="excelBtn">
+                            <input class="btn  derive_btn" type="submit" value="导出Excel" />
+                        </div>
+                    </form>
+                    <!-- 导出excel按钮 结束-->
+               <div class="hr-line-dashed"></div>   
+    </div>           
+              
+            <div class="col-xs-12">
+                            <table data-toggle="table"   data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>产品</th>
+                                        <th>渠道</th>
+                                        <th>新增注册</th>
+                                        <th>新增创角</th>
+                                        <th>创角转化率</th>
+                                        <th>新增付费率</th>
+                                        <th>新增arppu</th>
+                                        <th>新用户付费金额</th>
+                                        <th>区间总额</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data as $k=>$v){ ?>
+                                    <tr>
+
+                                        <td>{:$v['start_time']}</td>
+                                        <td>{:$product_list[$_GET['product']]} </td>
+                                        <td>{$v.渠道|msubstr=0,25}</td>
+                                        <td>{:$v['新增注册']} </td>
+                                        <td>{:$v['新增创角']} </td>
+                                        <td>{:$v['创角转化率']} </td>
+                                        <td>{:$v['新增付费率']} </td>
+                                        <td>{:$v['新增arppu']} </td>
+                                        <td>{:$v['新用户付费金额']} </td>
+                                        <td>{:$v['新用户充值区间金额']} </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                <div class="fixed-table-pagination">
+                    <div class="pull-left pagination-detail">
+                        {:$page}    
+                    </div>
+                    </div>
+        </div>
+    <!-- 全局js -->
+    
+    <include file="Public:globalJs"/>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script>
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+        
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            $('.pagination li').click(function(){       //分页转圈操作伪响应
+                    if(($(this).attr('class')!="active")&&($(this).attr('class')!="disabled")){
+                        layer.load();
+                    }
+            })
+            // function(){
+            //     $("wx_cps").style.display="none";
+            // }
+            //自适应 下拉选择框
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true      
+              }
+                <?php if($_GET['product']){ ?>
+                  $('select[name=product]').selectpicker('val', "{:$_GET['product']}");
+                <?php } ?> 
+
+                $('.mySelect').selectpicker({
+                     actionsBox:true,
+                     selectAllText:'全选',
+                     deselectAllText:'取消全选',
+                     liveSearch:true,
+                     mobile:ismobile
+                });
+                //时间选择器
+                laydate.render({
+                        elem: '.layer-date', //指定元素
+                        range: '到'
+                    });
+                //时间选择器
+                laydate.render({
+                        elem: '.layer-date1', //指定元素
+                        range: '到'
+                    });
+                //下拉联动以及加载预选
+            $('select[name=product]').on('changed.bs.select loaded.bs.select',function(e){
+                $('select[name="channel[]"]').html('');
+                $.post('{:U('h5Data/get_h5_channel')}',{id:$(this).val()},function(data){
+                    for(var i in data.info){
+                        $('select[name="channel[]"]').append("<option value=" + data.info[i].game_id + ">" + data.info[i].game_name  +"-"+data.info[i].platform+ "</option>");  
+                    }
+                    <?php if($_GET['channel']){ ?>
+                        if(e.type=="loaded"){
+                          $('select[name="channel[]"]').selectpicker('val', "{:implode(",", $_GET['channel'])}".split(','));
+                        }
+                    <?php } ?>
+                    $('select[name="channel[]"]').selectpicker('refresh');  
+                },'json');
+            });
+
+                //下拉联动以及加载预选
+            $('select[id=channel').on('changed.bs.select loaded.bs.select',function(e){
+                $('select[name="cpscode[]"]').html('');
+                $.post('{:U('h5Data/get_h5_cpscode')}',{code:$(this).val()},function(data){
+                    if (data.info) {
+                        document.getElementById('wx_cps').style.display ="";
+                    }else{
+                        document.getElementById('wx_cps').style.display ="none";
+                    }
+                    for(var i in data.info){
+                        $('select[name="cpscode[]"]').append("<option value=" + data.info[i] + ">" +data.info[i]+ "</option>");  
+                    }
+                    <?php if($_GET['cpscode']){ ?>
+                        $('select[name="cpscode[]"]').selectpicker('val', "{:implode(",", $_GET['cpscode'])}".split(','));
+                    <?php } ?>
+                    $('select[name="cpscode[]"]').selectpicker('refresh');  
+                },'json');
+            });
+             
+
+    </script>   
+</body>
+
+</html>

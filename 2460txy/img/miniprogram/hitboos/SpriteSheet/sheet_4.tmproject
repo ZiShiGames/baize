@@ -1,0 +1,19 @@
+{
+    "projectName": "sheet_4",
+    "version": 5,
+    "files": [
+        "./../SecondSense/pic_tools_bianzi.png",
+        "./../SecondSense/pic_tools_langyabang.png",
+        "./../SecondSense/pic_tools_liulian.png",
+        "./../SecondSense/pic_tools_mugun.png",
+        "./../SecondSense/pic_tools_tuoxie.png",
+        "./../SecondSense/pic_tools_zheyi.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "2"
+    }
+}

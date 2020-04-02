@@ -1,0 +1,17 @@
+{
+    "projectName": "sheet_6",
+    "version": 5,
+    "files": [
+        "./../FirstSense/male.png",
+        "./../FirstSense/male_skin.png",
+        "./../FirstSense/female.png",
+        "./../FirstSense/female_skin.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "2"
+    }
+}

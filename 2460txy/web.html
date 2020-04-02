@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script src="/js/minigame/cc_sdk.js?v=1"></script>
+    <script src="/js/minigame/vconsole.min.js?v=1"></script>
+    <!-- <script src="//h5sdk.cdn.zytxgame.com/js/minigame/cc_sdk.js"></script> -->
+</head>
+
+<body>
+    <!-- <iframe src='http://h7s0.fengzhangame.net/index2.php' style='height:800px;width:600px;'></iframe> -->
+    <p id='user_id'> </p>
+    <p id='appid'> </p>
+    <!-- <button onclick="sendMsg()">点击按钮</button> -->
+    <button onclick="init()">初始化</button>
+    <button onclick="btnToPay()">支付</button>
+    <button onclick="btnJumpToPay()">跳小程序支付</button>
+    <button onclick="btnToShare()">分享</button>
+    <button onclick="btnToAdvice()">投诉</button>
+    <button onclick="btnToService()">客服</button>
+    <script>
+        (function (window) {
+            var vConsole = new VConsole();
+            document.getElementById('user_id').innerHTML = "user_id: " + getParameter('user_id');
+            document.getElementById('appid').innerHTML = "appid: " + getParameter('appid');
+        })(window);
+        var p = false;
+
+        function getParameter(key) {
+            var href = location.search;
+            var p = href.substr(1, href.length - 1).split("&");
+            for (var i = 0; i < p.length; i++) {
+                if ((p[i].split("="))[0] == key) {
+                    return p[i].split("=")[1]
+                }
+            }
+        };
+        var sendMsg = function () {
+            wx.miniProgram.postMessage({
+                data: 'send test'
+            })
+            wx.miniProgram.navigateTo({
+                url: '/pages/wxpay/wxpay'
+            })
+            wx.miniProgram.navigateBack()
+        }
+
+        function init() {
+            console.log(this.cc);
+            cc.init(function () {
+                console.log('init ok')
+            })
+        }
+
+        function btnToPay() {
+            var order_info = {
+                money: 1, //金额 分
+                order_id: '121', //研发订单id
+                cp_role_id: '121', //研发角色id
+                product: '123', //商品名
+                product_id: '123', //商品id
+                server_id: 1
+            }
+            cc.pay(order_info)
+        }
+
+        function btnJumpToPay() {
+            var order_info = {
+                money: 1, //金额 分
+                order_id: '121', //研发订单id
+                cp_role_id: '121', //研发角色id
+                product: '123', //商品名
+                product_id: '123', //商品id
+                server_id: 1
+            }
+            cc.jumpToPay(order_info)
+        }
+
+        function btnToShare() {
+            var share_info = {
+                title: 'test',
+                imgUrl: 'http://h5sdk-xly.xileyougame.com/img/qr3.jpg',
+                cp_role_id:1111123,
+                server_id:111,
+                notify_url:'http://h5sdk-xly.xileyougame.com/index.php/test_api/check_share'
+            }
+            cc.share(share_info)
+        }
+
+        function btnToAdvice () {
+            cc.advice()
+        }
+
+        function btnToService () {
+            cc.service()
+        }
+
+    </script>
+</body>
+
+</html>

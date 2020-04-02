@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+    
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+     
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+    
+</head>
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/get_number')}">
+                        <div class="col-md-2">
+                           玩家roleid： <input name="roleid" class="form-control mySelect" type="text" value="{:$_GET['roleid']}" > 
+                        </div>
+                        <div class="col-md-2">
+                           玩家区服： <input name="ext" class="form-control mySelect" type="text" value="{:$_GET['ext']}" > 
+                        </div>
+                        <div class="col-md-2">
+                           <br/> <button type="submit" class="btn btn-w-m btn-info" >查询</button>
+                        </div>
+                    </form>
+               <div class="hr-line-dashed"></div>   
+    </div>           
+               
+            <div class="col-xs-12">
+                            <table data-toggle="table" data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>玩家渠道</th>
+                                        <th>玩家区服</th>
+                                        <th>玩家游戏名</th>
+                                        <th>玩家账号</th>
+                                        <th>玩家密码</th>
+                                        <th>操作</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td>{:$data['id']}</td>
+                                        <td>{:$data['platform']} </td>
+                                        <td>{:$data[ext]}</td>
+                                        <td>{:$data['nickname']} </td>
+                                        <td>{:$data['account']} </td>
+                                        <td>{:$data['password']} </td>
+                                        <td>
+                                            <?php if($data['status']=='1'){ ?>
+                                                <button onclick="operaTion('{:$data['cproleid']}','{:$data['status']}')">解封</button>
+                                            <?php }else if ($data['status']=='2'){ ?>
+                                                <button onclick="operaTion('{:$data['cproleid']}','{:$data['status']}')">封号</button>
+                                            <?php }else{ ?>
+                                            -
+                                            <?php } ?>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                <div class="fixed-table-pagination">
+                    <div class="pull-left pagination-detail">
+                        {:$page}    
+                    </div>
+                    </div>
+        </div>
+    <!-- 全局js -->
+    
+    <include file="Public:globalJs"/>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script>
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+        
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            // $('.pagination li').click(function(){
+            //         if($(this).attr('class')!="active"||$(this).attr('class')!="disabled"){
+            //             layer.load();
+            //         }
+            // })
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true      
+              }
+
+                <?php if($_GET['product']){ ?>
+                  $('select[name=product]').selectpicker('val', "{:$_GET['product']}");
+                <?php } ?> 
+
+                $('.mySelect').selectpicker({
+                 liveSearch:true,
+                 mobile:ismobile
+                });
+
+                laydate.render({
+                        elem: '.layer-date', //指定元素
+                        range: '到'
+                    });
+            // $('select[name=product]').on('changed.bs.select loaded.bs.select',function(e){
+            //     $('select[name=channel]').html('');
+            //     $.post('{:U('h5Data/get_h5_channel')}',{id:$(this).val()},function(data){
+            //         for(var i in data.info){
+            //             $('select[name="channel"]').append("<option value=" + data.info[i].game_id + ">" + data.info[i].game_name  +"-"+data.info[i].platform+ "</option>");  
+            //         }
+                    
+            //          <?php if($_GET['channel']){ ?>
+            //             if(e.type=="loaded"){
+            //               $('select[name=channel]').selectpicker('val', "{:$_GET['channel']}");
+            //             }
+            //         <?php } ?>
+                    
+            //         $('select[name=channel]').selectpicker('refresh');  
+            //     },'json');
+            // });
+
+            function operaTion(e,t) {
+                if(t=='1'){
+                    var error = '解封';
+                }else{
+                    var error = '封禁';
+                }
+                layer.open({
+                    type: 0,
+                    icon: 3,
+                    title: '提示',
+                    content: '确认'+ error +'【' + e +'】该玩家的账号吗?',
+                    btn: ['是', '否'],
+                    yes: function (index, layero) {
+                        $.post('{:U('h5Data/illegal_user')}', {cproleid:e}, function (data) {
+                            console.log(data)
+                            if (data.info=='1') {
+                                layer.close(index);
+                                msg('封号成功!');
+                            } else if (data.info=='2') {
+                                layer.close(index);
+                                msg('解封成功!');
+                            }
+                        })
+                    },
+                    cancel: function (index, layero) {
+                        layer.close(index)
+                        return false;
+                    },
+                })
+            }
+
+            /**
+             * 提示框[一些简单的提示信息]
+             * @param message 提示内容
+             * @param icon icon
+             * @param time 自动关闭所需毫秒（如果不配置，默认是3秒）
+             * @param func 自动关闭后执行特定的函数 string(函数名),bool(false)表示不执行
+             */
+            function msg(message, icon, func = true){
+                var index = layer.msg(message, {
+                    icon: icon,
+                }, function(){
+                    if(func != false){
+                        window.location.reload();
+                    }
+                });
+            }
+
+    </script>   
+</body>
+
+</html>

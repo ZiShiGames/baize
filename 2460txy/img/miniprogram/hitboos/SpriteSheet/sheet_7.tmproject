@@ -1,0 +1,21 @@
+{
+    "options": {
+        "layoutMath": "0",
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0
+    },
+    "version": 5,
+    "files": [
+        "./../RankingSense/friend_rank_title.png",
+        "./../ScrollBar/roundthumb.png",
+        "./../ScrollBar/scroll_top_bg.png",
+        "./../ScrollBar/scroll_bottom_bg.png",
+        "./../Button/button_up.png",
+        "./../Button/button_down.png",
+        "./../RankingSense/btn_close_up.png",
+        "./../RankingSense/btn_close_down.png"
+    ],
+    "projectName": "sheet_7"
+}

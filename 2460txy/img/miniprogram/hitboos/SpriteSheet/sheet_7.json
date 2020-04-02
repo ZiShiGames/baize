@@ -1,0 +1,9 @@
+{"file":"sheet_7.png","frames":{
+"btn_close_down_png":{"x":404,"y":0,"w":72,"h":72,"offX":0,"offY":0,"sourceW":72,"sourceH":72},
+"btn_close_up_png":{"x":328,"y":0,"w":72,"h":72,"offX":0,"offY":0,"sourceW":72,"sourceH":72},
+"button_down_png":{"x":480,"y":39,"w":16,"h":16,"offX":0,"offY":0,"sourceW":16,"sourceH":16},
+"button_up_png":{"x":480,"y":19,"w":16,"h":16,"offX":0,"offY":0,"sourceW":16,"sourceH":16},
+"scroll_bottom_bg_png":{"x":0,"y":77,"w":810,"h":21,"offX":0,"offY":0,"sourceW":810,"sourceH":21},
+"scroll_top_bg_png":{"x":480,"y":0,"w":234,"h":15,"offX":0,"offY":0,"sourceW":234,"sourceH":15},
+"roundthumb_png":{"x":480,"y":59,"w":6,"h":6,"offX":0,"offY":0,"sourceW":6,"sourceH":6},
+"friend_rank_title_png":{"x":0,"y":0,"w":324,"h":73,"offX":0,"offY":0,"sourceW":324,"sourceH":73}}}

@@ -1,0 +1,30 @@
+body {
+	background: url(../img/app_bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.wrapper {
+	display: table;
+}
+
+.login-block {
+	background: #1F1D19;
+	padding: 10px;
+	border-radius: 10px;
+	position: fixed;
+	top: 80%;
+	left: 50%;
+	width:70%;
+	height: 120px;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+}
+.login-block .title{
+	color: #BFB188;
+	font-size: 16px;
+}
+.login-block .login-image {
+	text-align: center;
+}

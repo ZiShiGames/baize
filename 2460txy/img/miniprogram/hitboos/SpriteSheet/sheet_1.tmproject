@@ -1,0 +1,25 @@
+{
+    "projectName": "SpirteSheet",
+    "version": 5,
+    "files": [
+        "./../FirstSense/btn_start_game_up.png",
+        "./../FirstSense/btn_start_game_down.png",
+        "./../FirstSense/bottom_bg.png",
+        "./../FirstSense/btn_ranking_down.png",
+        "./../FirstSense/btn_ranking_up.png",
+        "./../FirstSense/btn_shareRanking_down.png",
+        "./../FirstSense/btn_shareRanking_up.png",
+        "./../FirstSense/female_skin.png",
+        "./../FirstSense/female.png",
+        "./../FirstSense/male_skin.png",
+        "./../FirstSense/male.png",
+        "./../FirstSense/red_seal.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "2"
+    }
+}

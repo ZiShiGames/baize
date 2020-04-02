@@ -1,0 +1,34 @@
+{
+    "projectName": "sheet_3",
+    "version": 5,
+    "files": [
+        "./../SecondSense/pic_male.png",
+        "./../SecondSense/pic_female.png",
+        "./../SecondSense/tools_border_nol.png",
+        "./../SecondSense/tools_border_click.png",
+        "./../SecondSense/tool_lock.png",
+        "./../SecondSense/tool_lock_icon.png",
+        "./../SecondSense/tool_lock_bg.png",
+        "./../SecondSense/selected_icon.png",
+        "./../SecondSense/pic_table_items_bg.png",
+        "./../SecondSense/pic_name_bg.png",
+        "./../SecondSense/pic_money_bg.png",
+        "./../SecondSense/pic_gray_table_bg.png",
+        "./../SecondSense/pic_boosHP_bg.png",
+        "./../SecondSense/pic_boos_talk_bg.png",
+        "./../SecondSense/experience_line.png",
+        "./../SecondSense/demage_icon.png",
+        "./../SecondSense/coin_2.png",
+        "./../SecondSense/clock_icon.png",
+        "./../SecondSense/buy_tools_bg.png",
+        "./../SecondSense/btn_2_ranking_up.png",
+        "./../SecondSense/btn_2_ranking_down.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "0"
+    }
+}

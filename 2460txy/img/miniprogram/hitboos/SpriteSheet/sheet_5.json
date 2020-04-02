@@ -1,0 +1,10 @@
+{"file":"sheet_5.png","frames":{
+"boos_talk_skin_png":{"x":240,"y":211,"w":250,"h":77,"offX":0,"offY":0,"sourceW":250,"sourceH":77},
+"btn_female_down_png":{"x":443,"y":0,"w":54,"h":72,"offX":0,"offY":0,"sourceW":54,"sourceH":72},
+"btn_female_up_png":{"x":387,"y":0,"w":54,"h":72,"offX":0,"offY":0,"sourceW":54,"sourceH":72},
+"btn_male_down_png":{"x":148,"y":90,"w":54,"h":72,"offX":0,"offY":0,"sourceW":54,"sourceH":73},
+"btn_male_up_png":{"x":406,"y":74,"w":54,"h":72,"offX":0,"offY":0,"sourceW":54,"sourceH":72},
+"btn_start_game_down_png":{"x":148,"y":0,"w":237,"h":88,"offX":0,"offY":0,"sourceW":238,"sourceH":88},
+"btn_start_game_up_png":{"x":0,"y":184,"w":237,"h":88,"offX":0,"offY":0,"sourceW":238,"sourceH":88},
+"seal_1_png":{"x":240,"y":90,"w":164,"h":119,"offX":0,"offY":0,"sourceW":164,"sourceH":119},
+"seal_2_png":{"x":0,"y":0,"w":145,"h":182,"offX":0,"offY":0,"sourceW":146,"sourceH":182}}}

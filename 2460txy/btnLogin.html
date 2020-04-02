@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+
+    <body>
+
+        <button id="btnLogin" type="button" name="button" onclick="login()">点击按钮调起登录</button>
+        <script>
+            function login() {
+                console.log("login");
+
+                var newHtml;
+                newHtml = '<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);position: fixed;left:0;top:0;">';
+                newHtml += '<div style="position:absolute;left:50%;top:40%;width:400px;height:300px;margin-left: -200px;background-color:#fff;">';
+                newHtml += '<h6 style="font-size:20px;margin:20px auto;width:100%;text-align:center; font-weight: normal;">登录</h6>';
+                newHtml += '<div>';
+                newHtml +=
+                    '<input style="font-size: 14px;width:80%;height:36px;line-height: 36px;margin:0 auto;margin-bottom:6px;border:none;border-bottom: 1px solid #ddd;display:block;padding:4px 10px;box-sizing:border-box;" type="text" name="" value="" placeholder="账号">';
+                newHtml += '<div style="width:80%;height:auto;margin: 0 auto;overflow:hidden;">';
+                newHtml +=
+                    '<input style="float: left;width:60%;height:36px;line-height: 36px;margin:0 auto;margin-bottom:6px;border:none;border-bottom: 1px solid #ddd;display:block;padding:4px 10px;box-sizing:border-box;" type="password" name="password" value="" placeholder="密码" maxlength="20" >';
+                newHtml += '<button style="float:right;width: 80px;height:36px;line-height:36px;" type="button" name="button" onclick="signIn()">一键注册</button>';
+                newHtml += '</div>';
+                newHtml += '</div>';
+                newHtml += '<div id="loginClick"  style="position:absolute;left:0;bottom:0;width:100%;height:50px;line-height: 50px;background-color:#f9d337; color#fff; text-align:center;" onclick="loginClick()">登录</div>';
+                newHtml += '</div>';
+                newHtml += '</div>';
+
+                var loginInfo = document.createElement("div");
+                loginInfo.innerHTML = newHtml;
+
+                document.getElementsByTagName("body")[0].appendChild(loginInfo);
+            }
+
+            function loginClick() {
+                alert('点击登录');
+            }
+
+            function signIn() {
+                alert('点击注册');
+            }
+
+        </script>
+    </body>
+
+</html>

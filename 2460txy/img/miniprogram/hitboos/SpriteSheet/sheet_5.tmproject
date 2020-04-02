@@ -1,0 +1,22 @@
+{
+    "projectName": "sheet_5",
+    "version": 5,
+    "files": [
+        "./../FirstSense/seal_2.png",
+        "./../FirstSense/seal_1.png",
+        "./../FirstSense/btn_start_game_up.png",
+        "./../FirstSense/btn_start_game_down.png",
+        "./../FirstSense/btn_male_up.png",
+        "./../FirstSense/btn_male_down.png",
+        "./../FirstSense/btn_female_up.png",
+        "./../FirstSense/btn_female_down.png",
+        "./../FirstSense/boos_talk_skin.png"
+    ],
+    "options": {
+        "sizeMode": "free",
+        "useExtension": 1,
+        "layoutGap": 2,
+        "extend": 0,
+        "layoutMath": "2"
+    }
+}

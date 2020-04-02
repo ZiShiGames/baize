@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>白泽游戏后台 - 登录超时</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+
+    <!-- <script>if(window.top !== window.self){ window.top.location = window.location;}</script> -->
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="lock-word animated fadeInDown">
+    </div>
+    <div class="middle-box text-center lockscreen animated fadeInDown" style="padding-top:0">
+        <div>
+
+            <div class="m-b-md" >
+                <img alt="image" class="img-circle circle-border" src="__PUBLIC__/img/a1.jpg">
+            </div>
+            <h3>{:$_SESSION['admin_info']['admin_user_name']}</h3>
+            <p>您需要再次输入密码</p>
+            <form class="m-t" role="form" action="{:U('Login/lockscreen')}" method="POST"  onsubmit="return formValidator(this);">
+                <div class="form-group">
+                    <input name='pwd' type="password" class="form-control" placeholder="******" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width">登录</button>
+            </form>
+        </div>
+    </div>
+
+     <!-- 全局js -->
+    <include file="Public:globalJs"/>
+        
+        <script type="text/javascript">
+            if( parent.window.screen.height<=600){$('.m-b-md').hide()}
+                function formValidator(obj){
+                  $.ajax({  
+                       type: "POST",  
+                       url: "{:U('Login/lockscreen')}",  
+                       data: $(obj).serializeArray(),  
+                        dataType: 'json',  
+                       success: function(msg){  
+                           if (msg.status==1) {
+                                parent.layer.msg(msg.info)
+                                parent.Interval();  
+                                var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                           }else{
+                                parent.layer.msg(msg.info)
+                           }
+                       }  
+                    });  
+                    return false;
+                }
+        </script>
+</body>
+
+</html>

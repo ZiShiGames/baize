@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+
+    <body>
+        <button type="button" name="button" onclick="signUp_show()">点击按钮调起注册</button>
+
+        <script type="text/javascript">
+            /*
+             * 注册
+             */
+            function signUp_show() {
+                console.log("signUp");
+                console.log("注册");
+
+                var signUpHTML;
+                signUpHTML = '<div style="width:100%;height:100%;background-color:rgba(0,0,0,0.5);position: fixed;left:0;top:0;z-index:999999;" alt="遮罩">';
+                signUpHTML += '<div style="position:absolute;left:50%;top:40%;width:280px;height:260px;margin-left:-140px;background-color:#fff;overflow:hidden;border-radius:10px;" alt="弹框体">';
+                signUpHTML +=
+                    '<div id="signUpCloses" onclick="signUp_hide()" style="color: #5c6280;line-height:3.5rem;text-align:center;height:40px;width: 40px;font-size:34px;position:absolute;top:0;right:0; z-index: 999; cursor:pointer;opacity:0.5;" alt="关闭按钮"></div>';
+                signUpHTML += '<h6 style="font-size:20px;color:#333;margin:10px auto;width:100%;text-align:center;font-weight:normal;" alt="标题">';
+                signUpHTML += '注册';
+                signUpHTML += '</h6>';
+                signUpHTML += '<div alt="用户交互区">';
+                signUpHTML +=
+                    '<input style="font-size:14px;width:88%;height:40px;line-height:40px;margin:0 auto;margin-bottom:20px;border:none;border-bottom: 1px solid #ddd;display:block;padding:4px 10px;box-sizing:border-box;outline:none;border-radius:0;" type="text" name="" value="" placeholder="账号" alt="输入账号">';
+                signUpHTML += '<div style="width:88%;height:auto;margin:0 auto;overflow:hidden;">';
+                signUpHTML +=
+                    '<input style="float:left;font-size: 14px;width:100%;height:40px;line-height:40px;margin:0 auto;border:none;border-bottom: 1px solid #ddd;display:block;padding:4px 10px;box-sizing:border-box;outline:none;border-radius:0;" type="password" name="password" maxlength="20" value="" placeholder="密码" alt="输入密码">';
+                signUpHTML += '</div>';
+                signUpHTML += '</div>';
+                signUpHTML += '<div id="loginClick" style="position:absolute;left:0;bottom:0;width:100%;height:50px;line-height: 50px;background-color:#f9d337;color:#333;text-align:center;cursor:pointer;" alt="登录按钮" onclick="signUpClick(this)">';
+                signUpHTML += '注册';
+                signUpHTML += '</div>';
+                signUpHTML += '</div>';
+                signUpHTML += '</div>';
+
+                var signUpInfo = document.createElement("div");
+                signUpInfo.setAttribute("id", "signUpModal");
+                signUpInfo.innerHTML = signUpHTML;
+
+                document.getElementsByTagName("body")[0].appendChild(signUpInfo);
+                document.getElementById('signUpCloses').style.display = 'none';
+
+                loadStyleString("#signUpCloses::before{content:'\\00D7';width:100%;height:100%;position:absolute;bottom: 10px;left: 0;}");
+
+            }
+
+            function signUpClick(event) {
+                event.style.color = '#fff';
+                console.log('点击注册');
+            }
+
+            // css加伪元素
+            function loadStyleString(css) {
+                var style = document.createElement("style");
+                style.type = "text/css";
+                try {
+                    style.appendChild(document.createTextNode(css));
+                } catch (ex) {
+                    style.styleSheet.cssText = css;
+                }
+                var head = document.getElementsByTagName('head')[0];
+                head.appendChild(style);
+            }
+
+            // 关闭注册页面
+            function signUp_hide() {
+                var signUpModal = document.getElementById('signUpModal');
+                document.getElementsByTagName("body")[0].removeChild(signUpModal);
+            }
+
+        </script>
+
+    </body>
+
+</html>

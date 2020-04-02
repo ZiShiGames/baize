@@ -1,0 +1,13 @@
+{"file":"sheet_1.png","frames":{
+"red_seal_png":{"x":748,"y":660,"w":1009,"h":474,"offX":55,"offY":0,"sourceW":1080,"sourceH":669},
+"male_png":{"x":364,"y":661,"w":360,"h":377,"offX":0,"offY":0,"sourceW":360,"sourceH":377},
+"male_skin_png":{"x":0,"y":0,"w":744,"h":657,"offX":5,"offY":0,"sourceW":754,"sourceH":657},
+"female_png":{"x":0,"y":661,"w":360,"h":447,"offX":0,"offY":0,"sourceW":360,"sourceH":447},
+"female_skin_png":{"x":748,"y":0,"w":744,"h":656,"offX":5,"offY":1,"sourceW":754,"sourceH":657},
+"btn_shareRanking_up_png":{"x":1679,"y":1138,"w":301,"h":209,"offX":1,"offY":0,"sourceW":303,"sourceH":210},
+"btn_shareRanking_down_png":{"x":1373,"y":1138,"w":302,"h":209,"offX":1,"offY":0,"sourceW":303,"sourceH":210},
+"btn_ranking_up_png":{"x":1496,"y":360,"w":285,"h":225,"offX":1,"offY":0,"sourceW":286,"sourceH":226},
+"btn_ranking_down_png":{"x":1084,"y":1138,"w":285,"h":225,"offX":1,"offY":0,"sourceW":286,"sourceH":226},
+"bottom_bg_png":{"x":0,"y":1138,"w":1080,"h":213,"offX":0,"offY":0,"sourceW":1080,"sourceH":213},
+"btn_start_game_down_png":{"x":1496,"y":180,"w":475,"h":176,"offX":0,"offY":0,"sourceW":475,"sourceH":176},
+"btn_start_game_up_png":{"x":1496,"y":0,"w":475,"h":176,"offX":0,"offY":0,"sourceW":475,"sourceH":176}}}

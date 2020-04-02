@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+    
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+     
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+    
+</head>
+<style type="text/css">
+@media screen and (max-width: 1200px) { 
+    .excelBtn{
+        margin-top:-35px;
+        float:right;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .excelBtn{
+        margin-top:-35px;
+        float:none;
+    }
+}
+</style>
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/game_change')}">
+                        <div class="col-md-2">
+                           时间： <input name="start_time" type="text" class="form-control layer-date" value="{:$_GET['start_time']}" readonly="" > 
+                        </div>
+                        <div class="col-md-2">
+                           资讯包： <select name="product" class="form-control mySelect" title="请选择">
+                                    <?php foreach($product_list as $k=>$v){ ?>
+                                        <?php foreach($v as $kk=>$vv){ ?>
+                                            <option value="{$vv}">{$kk}</option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                 </select>
+                        </div>
+                        <div class="col-md-2">
+                            小游戏： <select name="channel" class="form-control mySelect" title="请选择">
+                                        <option value="6">英雄训练师</option>
+                                        <option value="40">口袋精灵王</option>
+                                    </select>
+                        </div>
+                        </div>
+                        <div class="col-md-2">
+                           <br/> <button type="submit" class="btn btn-w-m btn-info" onclick='layer.load();$(this).addClass("disabled");' >查询</button>
+                        </div>
+                    </form>
+
+               <div class="hr-line-dashed"></div>   
+    </div>           
+               
+            <div class="col-xs-12">
+                            <table data-toggle="table" data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>产品</th>
+                                        <th>渠道</th>
+                                        <th>新增自然量用户数</th>
+                                        <th>新增自然量转换率</th>
+                                        <th>新增渠道量用户数</th>
+                                        <th>新增渠道量转换率</th>
+                                        <th>总新增量</th>
+                                        <th>小游戏新增数</th>
+                                        <th>资讯包转换率</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data as $k=>$v){ ?>
+                                    <tr>
+                                        <td>{:$v['time']} </td>
+                                        <td>{:$product_list[$_GET['product']]} </td>
+                                        <td>{:$v['channel_name']} </td>
+                                        <td>{:$v['新增自然量用户数']} </td>
+                                        <td>{:$v['新增自然量转换率']} </td>
+                                        <td>{:$v['新增渠道量用户数']} </td>
+                                        <td>{:$v['新增渠道量转换率']} </td>
+                                        <td>{:$v['总新增量']} </td>
+                                        <td>{:$v['小游戏新增数']}</td>
+                                        <td>{:$v['资讯包转换率']} </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                <div class="fixed-table-pagination">
+                    <div class="pull-left pagination-detail">
+                        {:$page}    
+                    </div>
+                    </div>
+        </div>
+    <!-- 全局js -->
+    
+    <include file="Public:globalJs"/>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script>
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+        
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            $('.pagination li').click(function(){
+                    if($(this).attr('class')!="active"||$(this).attr('class')!="disabled"){
+                        layer.load();
+                    }
+            })
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true      
+              }
+
+                <?php if($_GET['product']){ ?>
+                  $('select[name=product]').selectpicker('val', "{:$_GET['product']}");
+                <?php } ?> 
+
+                $('.mySelect').selectpicker({
+                     actionsBox:true,
+                     selectAllText:'全选',
+                     deselectAllText:'取消全选',
+                     liveSearch:true,
+                     mobile:ismobile
+                });
+
+                laydate.render({
+                        elem: '.layer-date', //指定元素
+                        range: '到'
+                    });
+             
+
+    </script>   
+</body>
+
+</html>

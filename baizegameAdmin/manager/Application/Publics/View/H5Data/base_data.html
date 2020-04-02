@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <!-- <title>基础数据</title> -->
+    
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+     <!-- 全局CSS1 -->
+    <include file="Public:globalCss1"/>
+
+     <link href="__PUBLIC__/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+     
+
+     <!-- 全局CSS2 -->
+    <include file="Public:globalCss2"/>
+<link href="__PUBLIC__/css/plugins/bootstrap-select-1.13.9/bootstrap-select.min.css" rel="stylesheet">
+    
+</head>
+<body>
+     <div class="col-sm-10">
+                    <form class="row" method="GET" action="{:U('h5Data/base_data',array('channel'=>$_GET['channel']))}">
+                        <div class="col-md-2">
+                           时间： <input name="start_time" type="text" class="form-control layer-date" value="{:$_GET['start_time']}" readonly="" > 
+                        </div>
+                       <div class="col-md-2">
+                           产品： <select name="cps" class="form-control mySelect" title="请选择">
+                                    <?php foreach($product_list as $k=>$v){ ?>
+                                        <option value="{$k}">{$v}</option>
+                                    <?php } ?>
+                                 </select>
+                        </div>
+                        <div class="col-md-2">
+                           <br/> <button type="submit" class="btn btn-w-m btn-info" onclick='layer.load();$(this).addClass("disabled");' >查询</button>
+                        </div>
+                    </form>
+               <div class="hr-line-dashed"></div>   
+    </div>           
+              
+            <div class="col-xs-12">
+                            <table data-toggle="table"   data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <!-- <th>产品</th> -->
+                                        <th>渠道</th>
+                                        <th>新增注册</th>
+                                        <th>新增创角</th>
+                                        <th>创角转化率</th>
+                                        <th>总登陆用户</th>
+                                        <th>老用户登陆</th>
+                                        <th>新增付费率</th>
+                                        <th>新增arppu</th>
+                                        <th>新用户付费金额</th>
+                                        <th>老用户付费率</th>
+                                        <th>老用户arppu</th>
+                                        
+                                        <th>总付费率</th>
+                                        <th>总arpu</th>
+
+                                        <th>总付费人数(去重)</th>
+                                        
+                                        <th>总付费金额</th>
+                                        
+                                        <th>总arppu</th>
+                                        <th>LTV1</th>
+                                         <?php for($i=0;$i<=count($data[0]['ltv']['ltv']);$i++){ ?>
+                                            <th>ltv{:($i+1)}<br/>{:($i+1)}日留存</th>
+                                        <?php } ?>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach($data as $k=>$v){ ?>
+                                    <tr>
+
+                                        <td>{:$v['time']} </td>
+                                        <!-- <td>{:$product_list[$_GET['product']]} </td> -->
+                                        <td>{:$v['渠道']} </td>
+                                        <td>{:$v['新增注册']} </td>
+                                        <td>{:$v['新增创角']} </td>
+                                        <td>{:$v['创角转化率']} </td>
+                                        <td>{:$v['总登陆用户']} </td>
+                                        <td>{:$v['老用户登陆']} </td>
+                                        <td>{:$v['新增付费率']} </td>
+                                        <td>{:$v['新增arppu']} </td>
+                                        <td>{:$v['新用户付费金额']} </td>
+                                        <td>{:$v['老用户付费率']} </td>
+                                        <td>{:$v['老用户arppu']} </td>
+                                        
+                                        <td>{:$v['总付费率']} </td>
+                                        <td>{:$v['总arpu']} </td>
+
+                                        <td>{:$v['总付费人数']} </td>
+                                        <td>{:$v['总付费金额']} </td>
+                                       
+                                        <td>{:$v['总arppu']} </td>
+                                        <td>{:$v['ltv1']} </td>
+                                        
+                                        
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                <div class="fixed-table-pagination">
+                    <div class="pull-left pagination-detail">
+                        {:$page}    
+                    </div>
+                    </div>
+        </div>
+    <!-- 全局js -->
+    
+    <include file="Public:globalJs"/>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- 日期选择器 -->
+     <script src="__PUBLIC__/js/plugins/laydate/laydate.js"></script>
+    <!-- 日期选择器结束 -->
+    <!--解决ios打开iframe 宽大问题-->
+    <script type="text/javascript">
+        if( /iPhone/i.test(navigator.userAgent) ){
+            $('body').width(parent.window.document.body.offsetWidth);
+        }
+        
+    </script>
+    <!--解决结束-->
+    <!--下拉选择器插件-->
+    <script src="__PUBLIC__/js/plugins/bootstrap-select-1.13.9/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+            $('.pagination li').click(function(){       //分页转圈操作伪响应
+                    if(($(this).attr('class')!="active")&&($(this).attr('class')!="disabled")){
+                        layer.load();
+                    }
+            })
+            
+            //自适应 下拉选择框
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                var ismobile = true      
+              }
+                
+
+                $('.mySelect').selectpicker({
+                     actionsBox:true,
+                     selectAllText:'全选',
+                     deselectAllText:'取消全选',
+                     liveSearch:true,
+                     mobile:ismobile
+                });
+                <?php if($_GET['cps']){ ?>
+                  $('select[name="cps"]').selectpicker('val', "{:$_GET['cps']}");
+                  /* $('select[name="cps"]').selectpicker('refresh') */
+                <?php } ?> 
+                //时间选择器
+                laydate.render({
+                        elem: '.layer-date', //指定元素
+                        range: '到'
+                    });
+                //下拉联动以及加载预选
+            $('select[name=cps]').on('changed.bs.select loaded.bs.select',function(e){
+			    $('select[name="channel[]"]').html('');
+			    $.post('{:U('h5Data/get_h5_channel')}',{id:$(this).val(),cps:"<?=$_GET['cps_code']?>"},function(data){
+			        for(var i in data.info){
+			            $('select[name="channel[]"]').append("<option value=" + data.info[i].game_id + ">" + data.info[i].game_name  +"-"+data.info[i].platform+ "</option>");  
+			        }
+			        <?php if($_GET['channel']){ ?>
+			            if(e.type=="loaded"){
+			              $('select[name="channel[]"]').selectpicker('val', "{:implode(",", $_GET['channel'])}".split(','));
+			            }
+			        <?php } ?>
+			        $('select[name="channel[]"]').selectpicker('refresh');  
+			    },'json');
+			});
+
+    </script>   
+</body>
+
+</html>
